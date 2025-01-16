@@ -7,10 +7,13 @@
 
 ---
 
-### 15jan25_1240pm
-`Water & Todo Reminder.bat`
-- This bat file reminds you for drinking water every 30 mins
+### 16jan25_430pm
+`check_helpdesk_tickets_without_missing.bat`
 - Opens specific chrome URl at specified time duration to check out things without missing them.
+
+### 15jan25_1240pm
+`drink_water_reminder.bat`
+- This bat file reminds you for drinking water every 30 mins
 
 ### 7jan25
 `make admin yearly folder`

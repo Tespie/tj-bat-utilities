@@ -7,6 +7,25 @@
 
 ---
 
+### 20may25_305pm
+
+- `generate_files_for_whole_month_excluding_weekends_dynamic.bat`
+    - This script generates markdown (`.md`) files for each day of a specified month and year by copying a template file present in the same folder.
+    - **Highly configurable:**  
+        - **Month and Year:** Easily set in the configuration section.
+        - **Exclude Weekends:** Toggle whether to skip weekends (Saturday and Sunday) or include all days.
+        - **Leading Zero:** Choose whether the day in the filename has a leading zero (e.g., `01_Aug_2025.md`) or not (`1_Aug_2025.md`).
+        - **Month Name Format:**  
+            - Use the full month name (e.g., `August`) or a 3-letter abbreviation (e.g., `Aug`).
+                - Variable Values `3` | `full`
+            - Set the case for the month name: all uppercase (`AUG`), all lowercase (`aug`), or title case (`Aug`).
+                - Variable Values `title` | `lower` | `upper`
+    - **Filename examples:**  
+        - `01_Aug_2025.md`, `01_aug_2025.md`, `1_AUG_2025.md`, `1_Aug_2025.md`,`1_August_2025.md` (all formats are possible via configuration).
+    - **Usage:**  
+        - Edit the configuration section at the top of the script to set your preferences before running.
+- Old script is updated as it generate files for may 2025 only and too much static.
+
 ### 1may25_1216pm
 - `generate_files_for_whole_month.bat`
     - This script generates md files for each day of a specified month and year ( INCLUDING WEEKEND DATES) by copying the template file present in same folder.

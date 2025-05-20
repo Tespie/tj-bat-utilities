@@ -7,8 +7,15 @@
 @echo off
 setlocal enabledelayedexpansion
 
+@REM CONFIGURATION - start
 rem Set the source file
 set "source_file=new_5_comments_template.md"
+
+rem Set the month and year ( 01 means January, 02 means February, etc. )
+set "month=06"
+set "year=2025"
+
+@REM CONFIGURATION - end
 
 rem Check if template file exists
 if not exist "%source_file%" (
@@ -17,39 +24,26 @@ if not exist "%source_file%" (
     exit /b 1
 )
 
-rem Set the month and year
-set "month=05"
-set "year=2025"
+rem Get the month name dynamically (e.g., June)
+for /f %%m in ('powershell -NoLogo -Command "[CultureInfo]::InvariantCulture.DateTimeFormat.GetMonthName(%month%)"') do set "month_name=%%m"
+
+rem Calculate the number of days in the month
+for /f %%d in ('powershell -NoLogo -Command "(Get-Date -Year %year% -Month (%month%+1) -Day 1).AddDays(-1).Day"') do set "days_in_month=%%d"
 
 rem Loop through all days of the month
-for /L %%d in (1,1,31) do (
-    rem Check if the day is valid for the month
-    if %%d lss 29 (
-        set "date=%%d"
-    ) else if %%d==29 (
-        set "date=%%d"
-    ) else if %%d==30 (
-        if %month%==05 (
-            set "date=%%d"
-        )
-    ) else if %%d==31 (
-        if %month%==05 (
-            set "date=%%d"
-        )
-    )
+for /L %%d in (1,1,%days_in_month%) do (
+    rem No zero-padding here, just use %%d directly
+    set "day=%%d"
 
-    rem Get the day of the week (1=Monday, 7=Sunday)
-    for /F "tokens=1" %%a in ('powershell -command "[CultureInfo]::CurrentCulture.DateTimeFormat.GetDayName((Get-Date -Year !year! -Month !month! -Day !date!).DayOfWeek)"') do (
-        set "day_of_week=%%a"
-        if /I not "!day_of_week!"=="Saturday" if /I not "!day_of_week!"=="Sunday" (
-            rem Generate the new filename
-            set "new_file=!date!_may_2025.md"
-            rem Copy the template file to the new file
-            copy "!source_file!" "!new_file!"
-            echo Copied and Created !new_file!
-        ) else (
-            echo Skipping !date!_may_2025.md (Ouch! I found a weekend)
-        )
+    rem Get the day of the week (e.g., Monday, Tuesday, ...)
+    for /f %%w in ('powershell -NoLogo -Command "(Get-Date -Year %year% -Month %month% -Day %%d).DayOfWeek"') do set "weekday=%%w"
+
+    if /I not "!weekday!"=="Saturday" if /I not "!weekday!"=="Sunday" (
+        set "new_file=!day!_!month_name!_%year%.md"
+        copy "%source_file%" "!new_file!" >nul
+        echo Created !new_file!
+    ) else (
+        echo Skipping !day!_!month_name!_%year%.md (Weekend)
     )
 )
 

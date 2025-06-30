@@ -13,7 +13,7 @@ setlocal enabledelayedexpansion
 
 @REM CONFIGURATION - start
 rem Set the source file
-set "source_file=new_5_comments_template.md"
+set "source_file=new 6 comments_template_with_xxx.md"
 
 rem Set the month and year ( 01 means January, 02 means February, etc. )
 set "month=07"

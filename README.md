@@ -7,9 +7,15 @@
 
 ---
 
+### 5jun25_802pm
+- `make_yearly_folder_subfolders_dynamically.bat` ✅
+    - generate a year folder
+        - inside it, sub folders for every month
+            - inside every month folder, another set of folders as per your wish
+
 ### 20may25_305pm
 
-- `generate_files_for_whole_month_excluding_weekends_dynamic.bat`
+- `generate_files_for_whole_month_excluding_weekends_dynamic.bat` ✅
     - This script generates markdown (`.md`) files for each day of a specified month and year by copying a template file present in the same folder.
     - **Highly configurable:**  
         - **Month and Year:** Easily set in the configuration section.
@@ -27,9 +33,9 @@
 - Old script is updated as it generate files for may 2025 only and too much static.
 
 ### 1may25_1216pm
-- `generate_files_for_whole_month.bat`
+- `generate_files_for_whole_month.bat` ⭕
     - This script generates md files for each day of a specified month and year ( INCLUDING WEEKEND DATES) by copying the template file present in same folder.
-- `generate_files_for_whole_month_excluding_weekends.bat`
+- `generate_files_for_whole_month_excluding_weekends.bat` ⭕
     - This script generates md files for each day of a specified month and year ( EXCLUDING WEEKEND DATES ) by copying the template file present in same folder.
 
 ### 16jan25_430pm

@@ -62,7 +62,12 @@ if /I "%month_case%"=="upper" (
 rem (Title case is default, so nothing needed)
 
 rem Calculate the number of days in the month
-for /f %%d in ('powershell -NoLogo -Command "(Get-Date -Year %year% -Month (%month%+1) -Day 1).AddDays(-1).Day"') do set "days_in_month=%%d"
+@REM for /f %%d in ('powershell -NoLogo -Command "(Get-Date -Year %year% -Month (%month%+1) -Day 1).AddDays(-1).Day"') do set "days_in_month=%%d"
+
+rem -------------------------------------------------------------------------
+rem FIX IS HERE: Used [DateTime]::DaysInMonth instead of calculating logic
+rem -------------------------------------------------------------------------
+for /f %%d in ('powershell -NoLogo -Command "[DateTime]::DaysInMonth(%year%, %month%)"') do set "days_in_month=%%d"
 
 rem Loop through all days of the month
 for /L %%d in (1,1,%days_in_month%) do (
@@ -90,7 +95,7 @@ for /L %%d in (1,1,%days_in_month%) do (
         copy "%source_file%" "!new_file!" >nul
         echo Copied and Created !new_file!
     ) else (
-        echo Skipping !day!_!month_name!_%year%.md (Weekend)
+        echo Skipping !day!_!month_name!_%year%.md (Weekend^)
     )
 )
 

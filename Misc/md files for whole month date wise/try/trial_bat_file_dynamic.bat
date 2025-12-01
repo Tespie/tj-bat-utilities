@@ -16,7 +16,7 @@ rem Set the source file
 set "source_file=new 6 comments_template_with_xxx.md"
 
 rem Set the month and year ( 01 means January, 02 means February, etc. )
-set "month=07"
+set "month=12"
 set "year=2025"
 
 rem Set to '1' to exclude weekends (Saturday and Sunday)
@@ -25,7 +25,7 @@ set "exclude_weekends=1"
 
 rem Set to '1' for leading zero in day (01, 02...), 
 rem Set to '0' for no leading zero (1, 2...)
-set "leading_zero=1"
+set "leading_zero=0"
 
 rem Set month_length to '3' for 3-letter month ( JAN, FEB etc... )
 rem Set month_length to 'full' for full month name ( January, February etc... )
@@ -62,7 +62,13 @@ if /I "%month_case%"=="upper" (
 rem (Title case is default, so nothing needed)
 
 rem Calculate the number of days in the month
-for /f %%d in ('powershell -NoLogo -Command "(Get-Date -Year %year% -Month (%month%+1) -Day 1).AddDays(-1).Day"') do set "days_in_month=%%d"
+@REM for /f %%d in ('powershell -NoLogo -Command "(Get-Date -Year %year% -Month (%month%+1) -Day 1).AddDays(-1).Day"') do set "days_in_month=%%d"
+
+rem -------------------------------------------------------------------------
+rem FIX IS HERE: Used [DateTime]::DaysInMonth instead of calculating logic
+rem -------------------------------------------------------------------------
+for /f %%d in ('powershell -NoLogo -Command "[DateTime]::DaysInMonth(%year%, %month%)"') do set "days_in_month=%%d"
+
 
 rem Loop through all days of the month
 for /L %%d in (1,1,%days_in_month%) do (
@@ -90,7 +96,7 @@ for /L %%d in (1,1,%days_in_month%) do (
         copy "%source_file%" "!new_file!" >nul
         echo Copied and Created !new_file!
     ) else (
-        echo Skipping !day!_!month_name!_%year%.md (Weekend)
+        echo Skipping !day!_!month_name!_%year%.md (Weekend^)
     )
 )
 

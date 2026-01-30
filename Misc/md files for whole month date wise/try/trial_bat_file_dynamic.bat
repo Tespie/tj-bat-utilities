@@ -13,11 +13,11 @@ setlocal enabledelayedexpansion
 
 @REM CONFIGURATION - start
 rem Set the source file
-set "source_file=new 6 comments_template_with_xxx.md"
+set "source_file=3_li_comment_template.md"
 
 rem Set the month and year ( 01 means January, 02 means February, etc. )
-set "month=12"
-set "year=2025"
+set "month=02"
+set "year=2026"
 
 rem Set to '1' to exclude weekends (Saturday and Sunday)
 rem Set to '0' to include weekends (Saturday and Sunday)

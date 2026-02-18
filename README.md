@@ -7,6 +7,11 @@
 
 ---
 
+### 18feb26_1130am
+- `tejas_jt_helpdesk_linkedin_activity_checks` ✅
+    - Tejas Daily routine activities to be performed at some regular interval
+        - This script opens the Helpdesk tickets URL and LinkedIn tabs at specific times during the day.
+
 ### 5jun25_802pm
 - `make_yearly_folder_subfolders_dynamically.bat` ✅
     - generate a year folder
